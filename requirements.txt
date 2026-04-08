@@ -1,0 +1,20 @@
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+numpy==1.24.3
+scipy==1.11.4
+pandas==2.1.4
+matplotlib==3.8.2
+scikit-learn==1.3.2
+torch==2.1.2
+botorch==0.9.5
+python-multipart==0.0.6
+jinja2==3.1.2
+aiofiles==23.2.1
+python-dotenv==1.0.0
+# For database (SQLite for simplicity, can upgrade to InfluxDB later)
+sqlite3
+# For async operations
+asyncio
+# For battery modeling (simplified, PyBaMM would be complex for hackathon)
+# We'll create a simple battery model instead

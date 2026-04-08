@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battery-Life Lab - AI Battery Optimization</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <span class="logo-icon">⚡</span>
+            <span>Battery-Life Lab</span>
+        </div>
+        <div class="nav-links">
+            <a href="#problem">Problem</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#demo">Live Simulator</a>
+            <a href="#architecture">Architecture</a>
+        </div>
+        <a href="https://github.com/placeholder" class="btn btn-outline" target="_blank">GitHub</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="glow-bg"></div>
+        <div class="container hero-content">
+            <div class="badge">Autonoмous AI Platform</div>
+            <h1>An autonomous AI lab for smarter battery experiments, safer charging, and longer battery life.</h1>
+            <p>Design battery experiments, run virtual simulations, and optimize charging strategies automatically using reinforcement learning and Bayesian optimization.</p>
+            <div class="hero-cta">
+                <a href="#demo" class="btn btn-primary">Run Dashboard Demo</a>
+                <a href="#architecture" class="btn btn-secondary">Explore Architecture <span class="arrow">→</span></a>
+            </div>
+            
+            <div class="glass-card hero-stats mt-5">
+                <div class="stat-item">
+                    <span class="stat-value text-teal">+34%</span>
+                    <span class="stat-label">Cycle Life Extension</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value text-cyan">15x</span>
+                    <span class="stat-label">Faster Discovery</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value text-blue">99.2%</span>
+                    <span class="stat-label">Prediction Accuracy</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem & Solution Section -->
+    <section class="problem-solution" id="problem">
+        <div class="container">
+            <div class="grid-2">
+                <div class="glass-card">
+                    <div class="icon-circle red-glow">⚠️</div>
+                    <h2>The Problem</h2>
+                    <p>Phones and EVs suffer from battery degradation due to generic, sub-optimal charging patterns. Testing new physical strategies takes months of slow, expensive R&D.</p>
+                </div>
+                <div class="glass-card border-glow">
+                    <div class="icon-circle cyan-glow">✨</div>
+                    <h2>The Solution</h2>
+                    <p>Battery-Life Lab automates R&D. Our AI agent designs charging experiments, runs them in a virtual simulator overnight, and uses Bayesian optimization to find the perfect charging curve.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works section" id="how-it-works">
+        <div class="container text-center">
+            <h2 class="mb-5">Autonomous Optimization Loop</h2>
+            <div class="steps-container">
+                <div class="step-card glass-card">
+                    <div class="step-number">1</div>
+                    <h4>AI Planning</h4>
+                    <p>Agent selects charging parameters.</p>
+                </div>
+                <span class="step-arrow">→</span>
+                <div class="step-card glass-card">
+                    <div class="step-number">2</div>
+                    <h4>Simulation</h4>
+                    <p>Run virtual cycle in PyBaMM.</p>
+                </div>
+                <span class="step-arrow">→</span>
+                <div class="step-card glass-card">
+                    <div class="step-number">3</div>
+                    <h4>Analysis</h4>
+                    <p>Measure degradation & thermals.</p>
+                </div>
+                <span class="step-arrow">→</span>
+                <div class="step-card glass-card">
+                    <div class="step-number">4</div>
+                    <h4>Model Update</h4>
+                    <p>Refine RL & Gaussian Process.</p>
+                </div>
+                <span class="step-arrow">→</span>
+                <div class="step-card glass-card">
+                    <div class="step-number">5</div>
+                    <h4>Validation</h4>
+                    <p>Deploy best strategy to cells.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Demo Dashboard -->
+    <section class="demo-dashboard" id="demo">
+        <div class="container">
+            <h2 class="text-center mb-5">AI Simulation Dashboard</h2>
+            
+            <div class="dashboard-grid">
+                <!-- Parameters Panel -->
+                <div class="dash-panel glass-card">
+                    <h3>Simulation Parameters</h3>
+                    
+                    <div class="form-group">
+                        <label>Chemistry</label>
+                        <select id="sim-type" class="glass-input">
+                            <option value="nmc">NMC (Nickel Manganese Cobalt)</option>
+                            <option value="lfp">LFP (Lithium Iron Phosphate)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ambient Temp: <span id="temp-val" class="highlight">25°C</span></label>
+                        <input type="range" id="sim-temp" min="-10" max="50" value="25" class="glass-slider">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Charging Current: <span id="cr-val" class="highlight">1.5C</span></label>
+                        <input type="range" id="sim-c-rate" min="0.5" max="3.0" step="0.1" value="1.5" class="glass-slider">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Target SOC: <span id="soc-val" class="highlight">80%</span></label>
+                        <input type="range" id="sim-soc" min="50" max="100" value="80" class="glass-slider">
+                    </div>
+                    
+                    <button id="run-sim-btn" class="btn btn-primary w-100 mt-4">Execute AI Simulation</button>
+                </div>
+
+                <!-- Main Dashboard View -->
+                <div class="dash-main">
+                    <!-- AI Recommendation -->
+                    <div class="ai-recommendation glass-card active-border">
+                        <div class="ai-header">
+                            <div class="robot-icon">🤖</div>
+                            <div>
+                                <h4>Bayesian Optimizer Recommendation</h4>
+                                <span class="ai-status">Computing optimal step...</span>
+                            </div>
+                        </div>
+                        <div class="ai-stats-grid mt-3">
+                            <div class="ai-stat">
+                                <span>Suggested C-Rate</span>
+                                <strong class="text-teal" id="ai-rec-crate">1.2C</strong>
+                            </div>
+                            <div class="ai-stat">
+                                <span>Confidence</span>
+                                <strong id="ai-rec-conf">87%</strong>
+                            </div>
+                            <div class="ai-stat">
+                                <span>Predicted Gain</span>
+                                <strong class="text-blue">+12% Life</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KPI Metrics -->
+                    <div class="metrics-grid">
+                        <div class="metric-card glass-card">
+                            <div class="metric-label">Estimated SOH</div>
+                            <div class="metric-value" id="metric-soh">98.5%</div>
+                        </div>
+                        <div class="metric-card glass-card">
+                            <div class="metric-label">Charging Speed</div>
+                            <div class="metric-value" id="metric-speed">42 min</div>
+                        </div>
+                        <div class="metric-card glass-card">
+                            <div class="metric-label">Thermal Risk</div>
+                            <div class="metric-value text-green" id="metric-risk">Low</div>
+                        </div>
+                        <div class="metric-card glass-card">
+                            <div class="metric-label">Proj. Cycle Life</div>
+                            <div class="metric-value text-cyan" id="metric-cycles">1,450</div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Area -->
+                    <div class="glass-card chart-card">
+                        <h4>Capacity Retention vs. Cycles</h4>
+                        <div class="chart-container">
+                            <canvas id="capacityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Experiment History Table -->
+            <div class="glass-card mt-5">
+                <h4 class="mb-3">Experiment History Log</h4>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Run ID</th>
+                                <th>Strategy</th>
+                                <th>Peak C-Rate</th>
+                                <th>Max Temp</th>
+                                <th>Health Score</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-body">
+                            <tr>
+                                <td>#EXP-804</td>
+                                <td>Base CCCV</td>
+                                <td>1.5C</td>
+                                <td>38°C</td>
+                                <td>82/100</td>
+                                <td><span class="badge badge-success">Done</span></td>
+                            </tr>
+                            <tr>
+                                <td>#EXP-805</td>
+                                <td>RL-Agent v2</td>
+                                <td>2.1C</td>
+                                <td>41°C</td>
+                                <td>88/100</td>
+                                <td><span class="badge badge-success">Done</span></td>
+                            </tr>
+                            <tr class="active-row">
+                                <td>#EXP-806</td>
+                                <td class="text-cyan">Bayesian Optimal</td>
+                                <td>1.8C</td>
+                                <td>36°C</td>
+                                <td>95/100</td>
+                                <td><span class="badge badge-warning pulse">Running</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section class="architecture section" id="architecture">
+        <div class="container text-center">
+            <h2 class="mb-5">System Architecture</h2>
+            <div class="arch-diagram glass-card">
+                <div class="arch-layer">
+                    <div class="arch-box">Frontend Dashboard (React/Vanilla JS)</div>
+                </div>
+                <div class="arch-arrow">↓ REST API ↓</div>
+                <div class="arch-layer split">
+                    <div class="arch-box">Experiment Planner (FastAPI)</div>
+                    <div class="arch-box highlight">RL Agent & Bayes Opt (PyTorch/BoTorch)</div>
+                </div>
+                <div class="arch-arrow">↻ Closed Loop Evaluation ↻</div>
+                <div class="arch-layer split">
+                    <div class="arch-box">Virtual Simulator (PyBaMM)</div>
+                    <div class="arch-box">Hardware Bridge (Arbin/Maccor)</div>
+                </div>
+                <div class="arch-arrow">↓</div>
+                <div class="arch-layer">
+                    <div class="arch-box dark">Timeseries Database & Analytics (InfluxDB)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact & Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <h2 class="impact-text">Transforming the Future of Energy</h2>
+            <p>Every 1% increase in battery life saves millions of tons of e-waste and makes EVs more accessible. Battery-Life Lab builds the foundational intelligence for the electric era.</p>
+            <div class="footer-bottom mt-5">
+                <div class="logo">
+                    <span class="logo-icon">⚡</span> Battery-Life Lab
+                </div>
+                <div class="footer-links">
+                    <a href="#">Documentation</a>
+                    <a href="https://github.com/placeholder">GitHub</a>
+                </div>
+                <p class="copyright">&copy; 2026 Battery-Life Lab - Hackathon Project</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
